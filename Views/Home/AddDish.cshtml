@@ -1,0 +1,51 @@
+@model Wrapper
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add A Dish</title>
+</head>
+<body>
+    <header>
+        <h1>Add a Dish!</h1>
+    </header>
+    <main>
+        <a href="/">Home</a>
+        <form asp-action="CreateDish" asp-controller="Home" method="POST">
+            <span asp-validation-for="OneDish.Name"></span>
+            <label asp-for="OneDish.Name"></label>
+            <input asp-for="OneDish.Name">
+            <br>
+            <span asp-validation-for="OneDish.Calories"></span>
+            <label asp-for="OneDish.Calories"></label>
+            <input asp-for="OneDish.Calories">
+            <br>
+            <span asp-validation-for="OneDish.Tastiness"></span>
+            <label asp-for="OneDish.Tastiness"></label>
+            <select asp-for="OneDish.Tastiness">
+                <option value="" disabled selected>Tastiness Level</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+            </select>
+            <br>
+            <label asp-for="OneDish.ChefId"></label>
+            <select asp-for="OneDish.ChefId">
+                @foreach (Chef chef in Model.AllChefs)
+                {
+                    <option value="@chef.ChefId">@chef.FirstName @chef.LastName</option>
+                }
+            </select>
+            <br>
+            <span asp-validation-for="OneDish.Description"></span>
+            <label asp-for="OneDish.Description"></label>
+            <input asp-for="OneDish.Description">
+            <br>
+            <button>Add Dish</button>
+        </form>
+    </main>
+</body>
+</html>
